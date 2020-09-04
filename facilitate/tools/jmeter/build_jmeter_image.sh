@@ -11,6 +11,8 @@ oc adm policy add-role-to-user system:image-builder $OCP_USER
 # https://docs.openshift.com/container-platform/4.3/registry/securing-exposing-registry.html
 oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
 
+sleep 30
+
 export HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
 docker login -u $(oc whoami) -p $(oc whoami -t) $HOST
 
