@@ -30,4 +30,4 @@ oc get is
 # as of now the tekton task can use image-registry.openshift-image-registry.svc:5000/tools/jmeter-prevail2020
 
 # TODO:
-oc policy add-role-to-group -n tools system:image-puller system:serviceaccounts:app_project
+#oc policy add-role-to-group -n tools system:image-puller system:serviceaccounts:app_project
