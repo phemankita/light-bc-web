@@ -1,12 +1,5 @@
 oc project tools
 
-# Install influxdb
-oc apply -f influxdb/influxdb-data.yaml 
-oc apply -f influxdb/influxdb-secrets.yaml 
-oc apply -f influxdb/influxdb-config.yaml 
-oc apply -f influxdb/influxdb-deployment.yaml 
-oc apply -f influxdb/influxdb-service.yaml 
-
 oc get packagemanifests -n openshift-marketplace | grep grafana
 
 oc apply -f operator-group.yaml
@@ -25,9 +18,16 @@ spec:
   sourceNamespace: openshift-marketplace
 EOF
 
-echo "sleep for 120 seconds to give the operator time to install"
+# Install influxdb
+oc apply -f influxdb/influxdb-data.yaml 
+oc apply -f influxdb/influxdb-secrets.yaml 
+oc apply -f influxdb/influxdb-config.yaml 
+oc apply -f influxdb/influxdb-deployment.yaml 
+oc apply -f influxdb/influxdb-service.yaml 
 
-sleep 120
+echo "sleep for 60 seconds to give the operator time to install, before continuing the grafana installation"
+
+sleep 60
 oc apply -f grafana.yaml
 
 echo "sleep for 10 seconds"
