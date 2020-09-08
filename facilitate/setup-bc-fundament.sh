@@ -296,8 +296,14 @@ do
             ;;
         "setup jmeter-pipeline")
             echo "setup jmeter-pipeline"
+
             oc apply -f 07_jmeter_task.yaml 
-            oc apply -f pipeline-jmeter.yaml
+
+            cp pipeline-jmeter.yaml pipeline-jmeter.yaml.mod
+            sed -i "s/kitty-catt/${GIT_USERNAME}/g" pipeline-jmeter.yaml.mod
+            oc apply -f pipeline-jmeter.yaml.mod
+            rm pipeline-jmeter.yaml.mod
+
             break
             ;;    
         "run jmeter-pipeline")
