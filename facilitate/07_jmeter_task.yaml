@@ -18,7 +18,11 @@ spec:
     - name: source-dir
       default: /source
     - name: test-plan
-      default: facilitate/tools/jmeter/testplan/target.jmx     
+      default: facilitate/tools/jmeter/testplan/target.jmx           
+    - name: jmeter-users
+      default: "5"
+    - name: jmeter-loop-count
+      default: "100"
   volumes:
     - name: source
       emptyDir: {}
@@ -59,4 +63,13 @@ spec:
       script: |
         set +x
         ls $(params.source-dir)/$(params.test-plan)
+
+        # note: the export does not like the - sign
+        echo "export jmeter_users=$(echo $(params.jmeter-users))" > /tmp/jmeter.env
+        echo "export jmeter_loop_count=$(echo $(params.jmeter-loop-count))" >> /tmp/jmeter.env
+        #ls -lrt /tmp
+        #cat /tmp/jmeter.env
+        source /tmp/jmeter.env
+        env | grep jmeter_
+
         /opt/jmeter/apache-jmeter-5.2.1/bin/jmeter.sh -n -t $(params.source-dir)/$(params.test-plan) -l /tmp/report.jtl
