@@ -17,7 +17,7 @@ echo "--------------------------------------------------------------------------
 echo " " 
 
 PS3='Please enter your choice: '
-options=("install tools" "delete namespace" "init namespace" "install mysql non-persistent" "install mysql persistent" "setup basic pipeline" "run pipeline" "load db" "add sonar scan to pipeline" "setup pipeline with push to ICR" "run pipeline with push to ICR" "switch branch" "install Palo Alto Prisma Cloud Compute (Twistlock)" "setup jmeter-pipeline" "run jmeter-pipeline" "Quit")
+options=("install tools" "delete namespace" "init namespace" "install mysql non-persistent" "install mysql persistent" "setup basic pipeline" "run pipeline" "load db" "add sonar scan to pipeline" "setup pipeline with push to ICR" "run pipeline with push to ICR" "switch branch" "install Palo Alto Prisma Cloud Compute (Twistlock)" "setup jmeter-pipeline" "run jmeter-pipeline" "add auto-scaler" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -310,7 +310,13 @@ do
             echo "run jmeter-pipeline"
             tkn pipeline start jmeter-pipeline
             break
-            ;;                                  
+            ;;     
+         "add auto-scaler")
+            echo "adding horizontal pod autoscaling for the web-ui"
+            oc autoscale deployment web-lightblue-deployment --cpu-percent=10 --min=1 --max=3
+            oc get hpa
+            break
+            ;;                                         
         "Quit")
             break
             ;;
