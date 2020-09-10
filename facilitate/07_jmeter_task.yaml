@@ -72,4 +72,4 @@ spec:
         source /tmp/jmeter.env
         env | grep jmeter_
 
-        /opt/jmeter/apache-jmeter-5.2.1/bin/jmeter.sh -n -t $(params.source-dir)/$(params.test-plan) -l /tmp/report.jtl
+        /opt/jmeter/apache-jmeter-5.2.1/bin/jmeter.sh -n -t $(params.source-dir)/$(params.test-plan) -Jjmeter_users=$jmeter_users -Jjmeter_loop_count=$jmeter_loop_count -l /tmp/report.jtl
