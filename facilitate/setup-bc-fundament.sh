@@ -313,9 +313,9 @@ do
             ;;     
          "add auto-scaler")
             echo "adding horizontal pod autoscaling for the web-ui"
-            #oc autoscale deployment web-lightblue-deployment --cpu-percent=10 --min=1 --max=3
+            oc autoscale deployment web-lightblue-deployment --cpu-percent=10 --min=1 --max=3
             #oc set resources dc web-lightblue-deployment --requests=cpu=50m
-            oc autoscale deploymentconfig web-lightblue-deployment --cpu-percent=10 --min=1 --max=3
+            #oc autoscale deploymentconfig web-lightblue-deployment --cpu-percent=10 --min=1 --max=3
             
             oc get hpa
             break
