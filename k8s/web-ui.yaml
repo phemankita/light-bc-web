@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
         - name: web-lightblue-deployment
-          image: web-lightblue-deployment
+          image: index.docker.io/rocketronald/lightbluecompute-web
           ports:
             - containerPort: 8000
 ---
