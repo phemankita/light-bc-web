@@ -5,6 +5,17 @@ metadata:
   labels:
     app: web
 spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources:
+      requests:
+        cpu: 300m  
   selector:
     app: web
   replicas: 1
