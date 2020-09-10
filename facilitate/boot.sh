@@ -8,7 +8,7 @@ export GIT_USERNAME='<user>'
 
 # SonarQube Server Section
 # Login to SonarQube Server, make a project and generate a token for it.
-export SONARQUBE_URL='<route>'
+export SONARQUBE_URL='http://sonarqube-sonarqube.tools.svc.cluster.local:9000'
 export SONARQUBE_PROJECT='<project>'
 export SONARQUBE_LOGIN='<token>'
 
