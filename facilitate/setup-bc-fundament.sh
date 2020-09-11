@@ -266,11 +266,15 @@ do
             echo "setup jmeter-pipeline"
 
             oc apply -f 07_jmeter_task.yaml 
-
             cp pipeline-jmeter.yaml pipeline-jmeter.yaml.mod
             sed -i "s/kitty-catt/${GIT_USERNAME}/g" pipeline-jmeter.yaml.mod
             oc apply -f pipeline-jmeter.yaml.mod
             rm pipeline-jmeter.yaml.mod
+
+            # image pull permission
+            oc project tools
+            oc policy add-role-to-group system:image-puller system:serviceaccounts:${BC_PROJECT}
+            oc project ${BC_PROJECT}
 
             break
             ;;    
